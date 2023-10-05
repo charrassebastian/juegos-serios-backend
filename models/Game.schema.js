@@ -1,12 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const Purpose = new Schema({
-    "messagePropagation": [String],
-    "training": [String],
-    "informationExchange": { type: Boolean }
-})
-
 const Scope = new Schema({
     "market": [String],
     "public": [String]
@@ -15,7 +9,7 @@ const Scope = new Schema({
 const Game = new Schema({
     "name": { type: String, require: true, unique: true },
     "area": [String],
-    "purpose": Purpose,
+    "purpose": [String],
     "scope": Scope,
     "hasGoal": Boolean,
     "description": { type: String, require: true },
