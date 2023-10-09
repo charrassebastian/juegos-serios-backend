@@ -30,19 +30,23 @@ module.exports.getGames = async (req, res) => {
                         filteredGames.push({ game, priority: 4 })
                     }
                 })
-                if(req.query.onlyValidatedContent){
+                console.log('games after first filter')
+                console.log(filteredGames)
+                console.log('req.query')
+                console.log(req.query)
+                if(req.query.onlyValidatedContent === 'true'){
                     filteredGames = filteredGames.filter(game => game.contentValidation)
                 }
-                if(req.query.area){
+                if(req.query.area?.length){
                     filteredGames = filteredGames.filter(game => game.area.includes(req.query.area))
                 }
-                if(req.query.purpose){
+                if(req.query.purpose?.length){
                     filteredGames = filteredGames.filter(game => game.purpose.includes(req.query.purpose))
                 }
-                if(req.query.market){
+                if(req.query.market?.length){
                     filteredGames = filteredGames.filter(game => game.scope.market.includes(req.query.market))
                 }
-                if(req.query.public){
+                if(req.query.public?.length){
                     filteredGames = filteredGames.filter(game => game.scope.public.includes(req.query.public))
                 }
                 console.log('filtered games')
