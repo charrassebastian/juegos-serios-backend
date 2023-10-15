@@ -1,13 +1,12 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const mongoose = require('mongoose')
-const { router } = require('./routes')
-
-require('dotenv').config()
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
+const { router } = require('./routes')
 app.use(router)
+const mongoose = require('mongoose')
+require('dotenv').config()
 
 /**
  * Function for establishing the connection to the database. The parameters come from a .env file
