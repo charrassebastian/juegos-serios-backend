@@ -20,6 +20,6 @@ router.get('/api/games', getGames)
 /**
  * User.controller routes
  */
-router.get('/api/login', login)
+router.post('/api/login', login)
 
 module.exports.router = router
