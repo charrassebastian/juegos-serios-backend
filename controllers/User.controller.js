@@ -7,12 +7,13 @@ const jwt = require('jsonwebtoken')
  */
 module.exports.login = async (req, res) => {
     try {
+        const { username, password } = req.body;
         if (!username || !password) {
             const error = "Authentication header not present in the request"
             console.log(error)
             res.status(401).json({ status: 'error', error })
         } else {
-            const { username, password } = req.body;
+            
             const filter = { username, password }
             console.log('finding a user with the following filter')
             console.log(filter)
