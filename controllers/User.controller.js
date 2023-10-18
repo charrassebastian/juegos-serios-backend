@@ -7,7 +7,9 @@ const jwt = require('jsonwebtoken')
  */
 module.exports.login = async (req, res) => {
     try {
+        console.log('recieved login request')
         const { username, password } = req.body;
+        console.log('extracted username and password from the request body')
         if (!username || !password) {
             const error = "Authentication header not present in the request"
             console.log(error)
