@@ -1,10 +1,9 @@
 const Game = require('../models/Game.schema')
 
 /**
- * Endpoint for retrieving the saved games
+ * Controller for retrieving the saved games
  */
 module.exports.getGames = async (req, res) => {
-    // TODO: if the user wants to show only validated content, filter the games accordingly
     try {
         const games = await Game.find()
         if (games) {
