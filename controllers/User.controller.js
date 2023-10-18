@@ -19,11 +19,11 @@ module.exports.login = async (req, res) => {
         } else {
             const error = 'the user could not be found'
             console.log('error: ' + error)
-            res.json({ status: 'error', error })
+            res.status(401).json({ status: 'error', error })
         }
     } catch (error) {
         console.log('error')
         console.log(error)
-        res.json({ status: 'error', error })
+        res.status(500).json({ status: 'error', error })
     }
 }

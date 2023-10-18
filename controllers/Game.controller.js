@@ -13,7 +13,7 @@ module.exports.saveGame = async (req, res) => {
         if (!user) {
             const error = "User not found"
             console.log(error)
-            res.json({ status: 'error', error })
+            res.status(401).json({ status: 'error', error })
         } else {
             const game = new Game(req.body.game)
             console.log('saving the following game')
@@ -25,13 +25,13 @@ module.exports.saveGame = async (req, res) => {
             } else {
                 const error = 'the game could not be saved'
                 console.log('error: ' + error)
-                res.json({ status: 'error', error })
+                res.status(500).json({ status: 'error', error })
             }
         }
     } catch (error) {
         console.log('error')
         console.log(error)
-        res.json({ status: 'error', error })
+        res.status(500).json({ status: 'error', error })
     }
 }
 
@@ -48,7 +48,7 @@ module.exports.updateGame = async (req, res) => {
         if (!user) {
             const error = "User not found"
             console.log(error)
-            res.json({ status: 'error', error })
+            res.status(401).json({ status: 'error', error })
         } else {
             const game = await Game.findOneAndUpdate({ _id: req.query.id }, req.body.game)
             if (game) {
@@ -58,13 +58,13 @@ module.exports.updateGame = async (req, res) => {
             } else {
                 const error = "game with the id " + req.query.id + " not found"
                 module.exports.saveGame = console.log(error)
-                res.json({ status: 'error', error })
+                res.status(500).json({ status: 'error', error })
             }
         }
     } catch (error) {
         console.log('error')
         console.log(error)
-        res.json({ status: 'error', error })
+        res.status(500).json({ status: 'error', error })
     }
 }
 
@@ -84,12 +84,12 @@ module.exports.getGame = async (req, res) => {
         } else {
             const error = 'the game could not be found'
             console.log('error: ' + error)
-            res.json({ status: 'error', error })
+            res.status(500).json({ status: 'error', error })
         }
     } catch (error) {
         console.log('error')
         console.log(error)
-        res.json({ status: 'error', error })
+        res.status(500).json({ status: 'error', error })
     }
 }
 
@@ -106,7 +106,7 @@ module.exports.deleteGame = async (req, res) => {
         if (!user) {
             const error = "User not found"
             console.log(error)
-            res.json({ status: 'error', error })
+            res.status(401).json({ status: 'error', error })
         } else {
             const game = await Game.findOneAndDelete({ _id: req.query.id })
             if (game) {
@@ -116,12 +116,12 @@ module.exports.deleteGame = async (req, res) => {
             } else {
                 const error = "game with the id " + req.query.id + " not found"
                 console.log(error)
-                res.json({ status: 'error', error })
+                res.status(500).json({ status: 'error', error })
             }
         }
     } catch (error) {
         console.log('error')
         console.log(error)
-        res.json({ status: 'error', error })
+        res.status(500).json({ status: 'error', error })
     }
 }
