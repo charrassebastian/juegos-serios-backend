@@ -1,4 +1,5 @@
 const Game = require('../models/Game.schema')
+const jwt = require('jsonwebtoken')
 
 /**
  * Controller for adding a game to the database

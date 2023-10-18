@@ -1,4 +1,5 @@
 const User = require('../models/User.schema')
+const jwt = require('jsonwebtoken')
 
 /**
  * Controller for performing the login
