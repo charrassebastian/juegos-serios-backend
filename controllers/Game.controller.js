@@ -5,13 +5,13 @@ const jwt = require('jsonwebtoken')
  * Controller for adding a game to the database
  */
 module.exports.saveGame = async (req, res) => {
-    try {
-        const { username, password } = await jwt.verify(req.headers.authentication, process.env.JWT_SECRET)
-        if (!username || !password) {
+    try {        
+        if (!req.headers?.authentication) {
             const error = "Authentication header not present in the request"
             console.log(error)
             res.status(401).json({ status: 'error', error })
         } else {
+            const { username, password } = await jwt.verify(req.headers.authentication, process.env.JWT_SECRET)
             const filter = { username, password }
             const user = User.findOne(filter)
             console.log('found user')
@@ -47,7 +47,7 @@ module.exports.saveGame = async (req, res) => {
  */
 module.exports.updateGame = async (req, res) => {
     try {
-        if (!username || !password) {
+        if (!req.headers?.authentication) {
             const error = "Authentication header not present in the request"
             console.log(error)
             res.status(401).json({ status: 'error', error })
@@ -111,7 +111,7 @@ module.exports.getGame = async (req, res) => {
 */
 module.exports.deleteGame = async (req, res) => {
     try {
-        if (!username || !password) {
+        if (!req.headers?.authentication) {
             const error = "Authentication header not present in the request"
             console.log(error)
             res.status(401).json({ status: 'error', error })
