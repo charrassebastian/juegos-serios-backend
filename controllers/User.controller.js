@@ -23,7 +23,7 @@ module.exports.login = async (req, res) => {
             if (user) {
                 console.log('this is the found user')
                 console.log(user)
-                const token = jwt.sign(user, process.env.JWT_SECRET)
+                const token = jwt.sign({ username, password }, process.env.JWT_SECRET)
                 res.json({ status: 'ok', token })
             } else {
                 const error = 'the user could not be found'
