@@ -1,4 +1,5 @@
 const Game = require('../models/Game.schema')
+const User = require('../models/User.schema')
 const jwt = require('jsonwebtoken')
 
 /**
