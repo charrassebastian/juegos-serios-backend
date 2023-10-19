@@ -11,7 +11,7 @@ module.exports.login = async (req, res) => {
         const { username, password } = req.body;
         console.log('extracted username and password from the request body')
         if (!username || !password) {
-            const error = "Authentication header not present in the request"
+            const error = "The username or password was not present on the request"
             console.log(error)
             res.status(401).json({ status: 'error', error })
         } else {
