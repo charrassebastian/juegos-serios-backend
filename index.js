@@ -35,7 +35,7 @@ const run = async () => {
         })
     }
     mongoose.connection.once('open', () => {
-        console.log('MongoDB successfully connected to ' + uri)
+        console.log('MongoDB conectado exitosamente a ' + uri)
     })
 }
 
@@ -43,6 +43,6 @@ if (require.main === module) {
     const port = process.env.NODE_PORT ?? 8080
     // now it must connect to the database
     run()
-    app.listen(port, () => console.log('Listening on port ' + port))
+    app.listen(port, () => console.log('Escuchando al puerto ' + port))
 }
 module.exports.app = app
