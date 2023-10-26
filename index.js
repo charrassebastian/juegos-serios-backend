@@ -35,7 +35,7 @@ const run = async () => {
         })
     }
     mongoose.connection.once('open', () => {
-        console.log('MongoDB conectado exitosamente a ' + uri)
+        console.log('Conectado con base de datos MongoDB exitosamente')
     })
 }
 

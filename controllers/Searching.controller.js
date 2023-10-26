@@ -28,8 +28,6 @@ module.exports.getGames = async (req, res) => {
             } else {
                 filteredGames = games.map(game => ({ game, priority: 1 }))
             }
-            console.log('req.query')
-            console.log(req.query)
             if(req.query.onlyValidatedContent === 'true'){
                 filteredGames = filteredGames.filter(e => e.game.contentValidation)
             }
@@ -54,13 +52,10 @@ module.exports.getGames = async (req, res) => {
             }
             res.json({ status: 'ok', games: orderedGames })
         } else {
-            const error = 'los juegos no se pudieron extraer'
-            console.log('error: ' + error)
+            const error = 'No se encontraron juegos'
             res.status(500).json({ status: 'error', error })
         }
     } catch (error) {
-        console.log('error')
-        console.log(error)
         res.status(500).json({ status: 'error', error })
     }
 }
