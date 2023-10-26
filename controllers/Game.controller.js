@@ -8,29 +8,29 @@ const jwt = require('jsonwebtoken')
 module.exports.saveGame = async (req, res) => {
     try {        
         if (!req.headers?.authentication) {
-            const error = "Authentication header not present in the request"
+            const error = "Encabezado de autenticación no presente en la solicitud"
             console.log(error)
             res.status(401).json({ status: 'error', error })
         } else {
             const { username, password } = await jwt.verify(req.headers.authentication, process.env.JWT_SECRET)
             const filter = { username, password }
             const user = User.findOne(filter)
-            console.log('found user')
+            console.log('Usuario encontrado')
             console.log(user)
             if (!user) {
-                const error = "User not found"
+                const error = "Usuario no encontrado"
                 console.log(error)
                 res.status(401).json({ status: 'error', error })
             } else {
                 const game = new Game(req.body.game)
-                console.log('saving the following game')
+                console.log('guardando el juego')
                 console.log(req.body.game)
                 const savedGame = await game.save()
                 if (savedGame) {
-                    console.log('saved')
+                    console.log('guardado')
                     res.json({ status: 'ok' })
                 } else {
-                    const error = 'the game could not be saved'
+                    const error = 'el juego no se pudo guardar'
                     console.log('error: ' + error)
                     res.status(500).json({ status: 'error', error })
                 }
@@ -49,27 +49,27 @@ module.exports.saveGame = async (req, res) => {
 module.exports.updateGame = async (req, res) => {
     try {
         if (!req.headers?.authentication) {
-            const error = "Authentication header not present in the request"
+            const error = "Encabezado de autenticación no presente en la solicitud"
             console.log(error)
             res.status(401).json({ status: 'error', error })
         } else {
             const { username, password } = await jwt.verify(req.headers.authentication, process.env.JWT_SECRET)
             const filter = { username, password }
             const user = User.findOne(filter)
-            console.log('found user')
+            console.log('Usuario encontrado')
             console.log(user)
             if (!user) {
-                const error = "User not found"
+                const error = "Usuario no encontrado"
                 console.log(error)
                 res.status(401).json({ status: 'error', error })
             } else {
                 const game = await Game.findOneAndUpdate({ _id: req.query.id }, req.body.game)
                 if (game) {
-                    console.log('updated the following game')
+                    console.log('actualizado el juego')
                     console.log(game)
                     res.json({ status: 'ok' })
                 } else {
-                    const error = "game with the id " + req.query.id + " not found"
+                    const error = "juego con id " + req.query.id + " no encontrado"
                     module.exports.saveGame = console.log(error)
                     res.status(500).json({ status: 'error', error })
                 }
@@ -88,15 +88,15 @@ module.exports.updateGame = async (req, res) => {
 module.exports.getGame = async (req, res) => {
     try {
         const filter = { _id: req.query.id }
-        console.log('finding a game with the following filter')
+        console.log('encontrando un juego con el siguiente filtro')
         console.log(filter)
         const game = await Game.findOne(filter)
         if (game) {
-            console.log('these is the found game')
+            console.log('estos son los juegos encontrados')
             console.log(game)
             res.json({ status: 'ok', game })
         } else {
-            const error = 'the game could not be found'
+            const error = 'el juego no pudo ser encontrado'
             console.log('error: ' + error)
             res.status(500).json({ status: 'error', error })
         }
@@ -113,27 +113,27 @@ module.exports.getGame = async (req, res) => {
 module.exports.deleteGame = async (req, res) => {
     try {
         if (!req.headers?.authentication) {
-            const error = "Authentication header not present in the request"
+            const error = "Encabezado de autenticación no presente en la solicitud"
             console.log(error)
             res.status(401).json({ status: 'error', error })
         } else {
             const { username, password } = await jwt.verify(req.headers.authentication, process.env.JWT_SECRET)
             const filter = { username, password }
             const user = User.findOne(filter)
-            console.log('found user')
+            console.log('usuario encontrado')
             console.log(user)
             if (!user) {
-                const error = "User not found"
+                const error = "usuario no encontrado"
                 console.log(error)
                 res.status(401).json({ status: 'error', error })
             } else {
                 const game = await Game.findOneAndDelete({ _id: req.query.id })
                 if (game) {
-                    console.log('deleted the following game')
+                    console.log('eliminado el juego')
                     console.log(game)
                     res.json({ status: 'ok' })
                 } else {
-                    const error = "game with the id " + req.query.id + " not found"
+                    const error = "juego con id " + req.query.id + " no encontrado"
                     console.log(error)
                     res.status(500).json({ status: 'error', error })
                 }

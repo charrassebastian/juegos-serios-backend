@@ -7,26 +7,26 @@ const jwt = require('jsonwebtoken')
  */
 module.exports.login = async (req, res) => {
     try {
-        console.log('recieved login request')
+        console.log('solicitud de inicio de sesión recibida')
         const { username, password } = req.body;
-        console.log('extracted username and password from the request body')
+        console.log('nombre de usuario y contraseña extraídos del cuerpo de la solicitud')
         if (!username || !password) {
-            const error = "The username or password was not present on the request"
+            const error = "El nombre de usuario o la contraseña no estaban presentes en la solicitud."
             console.log(error)
             res.status(401).json({ status: 'error', error })
         } else {
             
             const filter = { username, password }
-            console.log('finding a user with the following filter')
+            console.log('buscando un usuario con el siguiente filtro')
             console.log(filter)
             const user = await User.findOne(filter)
             if (user) {
-                console.log('this is the found user')
+                console.log('este fue el usuario encontrado')
                 console.log(user)
                 const token = jwt.sign({ username, password }, process.env.JWT_SECRET)
                 res.json({ status: 'ok', token })
             } else {
-                const error = 'the user could not be found'
+                const error = 'El usuario no pudo ser encontrado'
                 console.log('error: ' + error)
                 res.status(401).json({ status: 'error', error })
             }

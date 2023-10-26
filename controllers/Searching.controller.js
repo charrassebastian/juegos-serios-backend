@@ -54,7 +54,7 @@ module.exports.getGames = async (req, res) => {
             }
             res.json({ status: 'ok', games: orderedGames })
         } else {
-            const error = 'the games could not be retrieved'
+            const error = 'los juegos no se pudieron extraer'
             console.log('error: ' + error)
             res.status(500).json({ status: 'error', error })
         }
