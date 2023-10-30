@@ -4,7 +4,8 @@ const escapeSpaces = (str, limiter, escapingCharacter) => {
     let escapedSearchString = ""
     let shouldEscapeSpaces = false
     console.log("starting for each using the following str: " + str)
-    str.forEach(c => {
+    for (let i = 0; i < str.length; i++){
+        let c = str[i]
         console.log("c: " + c)
         if (c === limiter) {
             console.log("c is equal to the limiter")
@@ -13,7 +14,7 @@ const escapeSpaces = (str, limiter, escapingCharacter) => {
             console.log("adding character")
             escapedSearchString += shouldEscapeSpaces && c === ' '  ? escapingCharacter : c
         }
-    })
+    }
     return espacedSearchString
 }
 
