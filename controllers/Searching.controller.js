@@ -3,9 +3,16 @@ const Game = require('../models/Game.schema')
 const escapeSpaces = (str, limiter, escapingCharacter) => {
     let escapedSearchString = ""
     let shouldEscapeSpaces = false
+    console.log("starting for each using the following str: " + str)
     str.forEach(c => {
-        if (c === limiter) shouldEscapeSpaces = !shouldEscapeSpaces
-        else escapedSearchString += shouldEscapeSpaces && c === ' '  ? escapingCharacter : c
+        console.log("c: " + c)
+        if (c === limiter) {
+            console.log("c is equal to the limiter")
+            shouldEscapeSpaces = !shouldEscapeSpaces
+        } else {
+            console.log("adding character")
+            escapedSearchString += shouldEscapeSpaces && c === ' '  ? escapingCharacter : c
+        }
     })
     return espacedSearchString
 }
