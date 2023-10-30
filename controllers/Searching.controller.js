@@ -29,8 +29,11 @@ module.exports.getGames = async (req, res) => {
             if (hasSearchValue) {
                 const searchString = req.query.value
                 const escapingCharacter = "@"
+                console.log("escaping spaces")
                 const escapedSearchString = escapeSpaces(searchString, '"', escapingCharacter)
+                console.log("generating primordial search tokens")
                 const primordialSearchTokens = escapedSearchString.split(" ")
+                console.log("generating search tokens")
                 const searchTokens = processTokens(primordialSearchTokens, escapingCharacter)
                 
                 console.log("searchString: " + searchString)
