@@ -13,8 +13,10 @@ const escapeSpaces = (str, limiter, escapingCharacter) => {
         } else {
             console.log("adding character")
             escapedSearchString += shouldEscapeSpaces && c === ' '  ? escapingCharacter : c
+            console.log("added character, escapedSearchString: " + escapedSearchString)
         }
     }
+    console.log("finished escaping spaces")
     return espacedSearchString
 }
 
