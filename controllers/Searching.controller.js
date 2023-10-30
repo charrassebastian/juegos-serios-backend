@@ -17,7 +17,7 @@ const escapeSpaces = (str, limiter, escapingCharacter) => {
         }
     }
     console.log("finished escaping spaces")
-    return espacedSearchString
+    return escapedSearchString
 }
 
 const processTokens = (primordialSearchTokens, escapingCharacter) => primordialSearchTokens.map(token => token.replace(escapingCharacter, " "))
