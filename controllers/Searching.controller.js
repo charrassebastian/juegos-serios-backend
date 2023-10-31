@@ -3,20 +3,14 @@ const Game = require('../models/Game.schema')
 const escapeSpaces = (str, limiter, escapingCharacter) => {
     let escapedSearchString = ""
     let shouldEscapeSpaces = false
-    console.log("starting for each using the following str: " + str)
     for (let i = 0; i < str.length; i++){
         let c = str[i]
-        console.log("c: " + c)
         if (c === limiter) {
-            console.log("c is equal to the limiter")
             shouldEscapeSpaces = !shouldEscapeSpaces
         } else {
-            console.log("adding character")
             escapedSearchString += shouldEscapeSpaces && c === ' '  ? escapingCharacter : c
-            console.log("added character, escapedSearchString: " + escapedSearchString)
         }
     }
-    console.log("finished escaping spaces")
     return escapedSearchString
 }
 
@@ -33,24 +27,14 @@ module.exports.getGames = async (req, res) => {
             // filter and order the games
             filteredGames = []
             const hasSearchValue = !!req.query.value?.length
-            console.log("has search value")
-            console.log(hasSearchValue)
 
             if (hasSearchValue) {
                 const searchString = req.query.value
                 const escapingCharacter = "@"
-                console.log("escaping spaces")
                 const escapedSearchString = escapeSpaces(searchString, '"', escapingCharacter)
-                console.log("generating primordial search tokens")
                 const primordialSearchTokens = escapedSearchString.split(" ")
-                console.log("generating search tokens")
                 const searchTokens = processTokens(primordialSearchTokens, escapingCharacter)
                 
-                console.log("searchString: " + searchString)
-                console.log("escapedSearchString: " + escapedSearchString)
-                console.log("primordialSearchTokens: " + primordialSearchTokens)
-                console.log("searchTokens: " + searchTokens)
-
                 let filteredGamesSet = new Set()
 
                 searchTokens.forEach(token => {
@@ -69,11 +53,7 @@ module.exports.getGames = async (req, res) => {
                     })
                 })
 
-                console.log("filteredGamesSet: ")
-                filteredGamesSet.forEach(game => console.log(game))
                 filteredGamesSet.forEach(filteredGame => filteredGames.push(filteredGame))
-                console.log("filteredGames: ")
-                filteredGames.forEach(game => console.log(game))
             } else {
                 filteredGames = games.map(game => ({ game, priority: 1 }))
             }
