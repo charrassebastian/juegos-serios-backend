@@ -66,7 +66,7 @@ module.exports.getGames = async (req, res) => {
             const shouldFilterByPublic = req.query.public?.length && req.query.public !== nonValidOption
 
             if(shouldHaveValidatedContent){
-                filteredGames = filteredGames.filter(e => e.game.contentValidation)
+                filteredGames = filteredGames.filter(e => e.game.contentValidation?.length)
             }
 
             if(shouldFilterByArea){
