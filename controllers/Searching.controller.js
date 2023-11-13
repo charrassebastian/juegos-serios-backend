@@ -52,7 +52,6 @@ module.exports.getGames = async (req, res) => {
                         }
                     })
                 })
-
                 filteredGamesSet.forEach(filteredGame => filteredGames.push(filteredGame))
             } else {
                 filteredGames = games.map(game => ({ game, priority: 1 }))
@@ -85,13 +84,15 @@ module.exports.getGames = async (req, res) => {
                 filteredGames = filteredGames.filter(e => e.game.scope.public.includes(req.query.public))
             }
 
+            const orderedGamesSet = new Set()
             const orderedGames = []
             for (let i = 1; i <= 4; i++){
                 filteredGames
                     .filter(filteredGame => filteredGame.priority === i)
                     .map(filteredGame => filteredGame.game)
-                    .forEach(game => orderedGames.push(game))
+                    .forEach(game => orderedGamesSet.add(game))
             }
+            orderedGamesSet.forEach(game => orderedGames.push(game))
 
             res.json({ status: 'ok', games: orderedGames })
         } else {
