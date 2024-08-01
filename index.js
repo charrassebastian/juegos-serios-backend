@@ -16,6 +16,9 @@ require('dotenv').config()
  */
 const run = async () => {
     let uri;
+    mongoose.connection.once('open', () => {
+        console.log('Conectado con base de datos MongoDB exitosamente')
+    })
     if(process.env.DB_URI?.length){
         uri = process.env.DB_URI
         await mongoose.connect(uri)
@@ -34,9 +37,9 @@ const run = async () => {
             useUnifiedTopology: true,
         })
     }
-    mongoose.connection.once('open', () => {
+    /*mongoose.connection.once('open', () => {
         console.log('Conectado con base de datos MongoDB exitosamente')
-    })
+    })*/
 }
 
 if (require.main === module) {
